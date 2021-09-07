@@ -19,5 +19,6 @@ buildscript {
     dependencies {
         //JitPack插件
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+
     }
 }
