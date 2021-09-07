@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.7">
+      <module name="Hello.app" target="11" />
+      <module name="Hello.common" target="11" />
+      <module name="Hello.independent.runmodel1" target="11" />
+      <module name="Hello.independent.runmodel2" target="11" />
+      <module name="Hello.model1" target="11" />
+      <module name="Hello.model2" target="11" />
+      <module name="Hello.router" target="11" />
+      <module name="Hello.structure" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
