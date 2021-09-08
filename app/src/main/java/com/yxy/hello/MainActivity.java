@@ -8,6 +8,9 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -22,6 +25,12 @@ public class MainActivity extends Activity {
             }
         });
         fff();
+//        private List<String> notTraceMethods = new ArrayList(new String[]{})listOf("<init>", "<clinit>")
+         List<String> notTraceMethods = new ArrayList<>();
+        notTraceMethods.add("<init>");
+        notTraceMethods.add("<clinit>");
+
+
     }
 
 
