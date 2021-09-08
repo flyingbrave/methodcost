@@ -1,6 +1,6 @@
 package com.yxy.slowmethod.method;
 
-import com.yxy.slowmethod.Log;
+import com.yxy.slowmethod.Method;
 
 import java.util.HashMap;
 
@@ -20,7 +20,7 @@ public class MethodTracer {
         Long startTime = timeHm.get(name);
         if(startTime!=null && startTime>0){
             timeHm.remove(name);
-            Log.saveSlowMethod(name, System.currentTimeMillis() - startTime);
+            Method.Companion.saveSlowMethod(name, System.currentTimeMillis() - startTime);
         }
 
     }
