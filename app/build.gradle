@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'methodcost'
-
+methodCostConfig {
+    enable = true
+    printLog = true
+    methodMonitorPkgs = ['com.yxy.hello']
+    exceptPkgList = []
+}
 
 android {
     compileSdk 31

@@ -18,8 +18,26 @@ public class MainActivity extends Activity {
         findViewById(R.id.textview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ggg();
             }
         });
+        fff();
+    }
+
+
+    private void fff(){
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void ggg(){
+        try {
+            Thread.sleep(2200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
