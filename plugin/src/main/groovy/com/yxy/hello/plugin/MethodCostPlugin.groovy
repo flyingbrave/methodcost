@@ -19,7 +19,7 @@ class MethodCostPlugin implements Plugin<Project> {
             methodCostConfig.methodMonitorPkgs = methodCostConfigExtension.methodMonitorPkgs
             methodCostConfig.exceptPkgList = methodCostConfigExtension.exceptPkgList
             methodCostConfig.printLog = methodCostConfigExtension.printLog
-            Log.d("MethodCostPlugin 1end!"+methodCostConfig.toString())
+//            Log.d("MethodCostPlugin 1end!"+methodCostConfig.toString())
 
             GlobalConfig.pluginConfig = methodCostConfig
 

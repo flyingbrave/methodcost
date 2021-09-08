@@ -3,7 +3,7 @@ package com.yxy.hello.plugin
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.yxy.slowmethod.Config
-import com.yxy.slowmethod.Log
+
 import com.yxy.slowmethod.method.GlobalConfig
 import com.yxy.slowmethod.method.MethodCostClassVisitor
 import org.apache.commons.codec.digest.DigestUtils
@@ -31,7 +31,7 @@ class MethodCostTransform extends Transform {
 
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
-        Log.d("ClassEditorTransform Start!")
+//        Log.d("ClassEditorTransform Start!")
         boolean isRelease = transformInvocation.getContext().getVariantName().contains("Release");
 
         def classEditor = GlobalConfig.pluginConfig;
@@ -43,7 +43,7 @@ class MethodCostTransform extends Transform {
             if (outputProvider != null) {
                 outputProvider.deleteAll()
             }
-            Log.d("TransformInvocation Start!")
+//            Log.d("TransformInvocation Start!")
 
             inputs.each { TransformInput input ->
                 input.directoryInputs.each { DirectoryInput directoryInput ->
@@ -55,7 +55,7 @@ class MethodCostTransform extends Transform {
                 }
             }
         } else {
-            Log.d("ClassEditorTransform Not Enable. Just Copy files!")
+//            Log.d("ClassEditorTransform Not Enable. Just Copy files!")
 
             Collection<TransformInput> inputs = transformInvocation.inputs
             TransformOutputProvider outputProvider = transformInvocation.outputProvider
@@ -99,7 +99,7 @@ class MethodCostTransform extends Transform {
 
     static void traceDirectory(DirectoryInput directoryInput, TransformOutputProvider outputProvider) {
         if (directoryInput.file.isDirectory()) {
-            Log.d("TransformInvocation Start!")
+//            Log.d("TransformInvocation Start!")
 
             directoryInput.file.eachFileRecurse { File file ->
                 def name = file.name
