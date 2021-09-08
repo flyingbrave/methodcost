@@ -1,6 +1,7 @@
 package com.yxy.slowmethod.method;
 
-import com.yxy.slowmethod.Method;
+import com.android.ddmlib.Log;
+
 
 import java.util.HashMap;
 
@@ -20,8 +21,27 @@ public class MethodTracer {
         Long startTime = timeHm.get(name);
         if(startTime!=null && startTime>0){
             timeHm.remove(name);
-            Method.Companion.saveSlowMethod(name, System.currentTimeMillis() - startTime);
+            Log.d("tag5","测试数据"+(traceToString(3, new Throwable().getStackTrace(), 15)));
+//            Method.Companion.saveSlowMethod(name, System.currentTimeMillis() - startTime);
         }
 
+    }
+
+    public static String traceToString(int skipStackCount, StackTraceElement[] stackArray, int maxLineCount){
+        if (stackArray==null||stackArray.length==0) {
+            return "[]";
+        }
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < stackArray.length - skipStackCount; i++) {
+            if (i <= skipStackCount) {
+                continue;
+            }
+            b.append(stackArray[i]);
+            b.append("\n");
+            if (i > maxLineCount) {
+                break;
+            }
+        }
+        return b.toString();
     }
 }
