@@ -3,6 +3,7 @@ package com.yxy.hello.plugin
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.yxy.slowmethod.Config
+import com.yxy.slowmethod.method.MethodCostClassVisitor
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
@@ -146,81 +147,7 @@ class MethodCostTransform extends Transform {
         }
     }
 
-    class MethodCostClassVisitor extends ClassVisitor {
 
-        private List<String> notTraceMethods = new ArrayList<>();
-        private String className = "";
-        private boolean isInConfigPkgList = false;
-
-        MethodCostClassVisitor(int api,ClassVisitor cv) {
-            super(api, cv)
-            notTraceMethods.add("<init>");
-            notTraceMethods.add("<clinit>");
-        }
-
-        public void visit(
-                final int version,
-                final int access,
-                final String name,
-                final String signature,
-                final String superName,
-                final String[] interfaces) {
-            super.visit(version, access, name, signature, superName, interfaces)
-            this.className = name;
-        }
-
-        @Override
-        MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-            boolean isUnImplMethod = access && Opcodes.ACC_ABSTRACT > 0 || access && Opcodes.ACC_INTERFACE > 0;
-            if (notTraceMethods.contains(name) || isUnImplMethod || !isInConfigPkgList) {
-               return super.visitMethod(access, name, desc, signature, exceptions)
-            } else {
-                String methodName = className;
-                MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions)
-                return new MethodCostMethodVisitor(api,
-                        mv,
-                        access,
-                        name,
-                        desc,
-                        methodName)
-            }
-
-
-        }
-    }
-    class MethodCostMethodVisitor extends AdviceAdapter{
-
-        private String methodNameParams;
-
-        protected MethodCostMethodVisitor(int api, MethodVisitor methodVisitor, int access, String name, String descriptor,String methodNameParams) {
-            super(api, methodVisitor, access, name, descriptor)
-            this.methodNameParams=methodNameParams;
-        }
-
-        @Override
-        protected void onMethodEnter() {
-            super.onMethodEnter()
-            mv.visitLdcInsn(methodNameParams)
-            mv.visitMethodInsn(
-                    Opcodes.INVOKESTATIC, MethodTracer.CLASS_PATH,
-                    MethodTracer.METHOD_RECORD_METHOD_START,
-                    MethodTracer.METHOD_RECORD_METHOD_END_PARAMS,
-                    false
-            )
-        }
-
-        @Override
-        protected void onMethodExit(int opcode) {
-            super.onMethodExit(opcode)
-            mv.visitLdcInsn(methodNameParams)
-            mv.visitMethodInsn(
-                    Opcodes.INVOKESTATIC, MethodTracer.CLASS_PATH,
-                    MethodTracer.METHOD_RECORD_METHOD_END,
-                    MethodTracer.METHOD_RECORD_METHOD_END_PARAMS,
-                    false
-            )
-        }
-    }
 
 
 }

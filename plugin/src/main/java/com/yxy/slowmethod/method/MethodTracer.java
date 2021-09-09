@@ -1,6 +1,7 @@
 package com.yxy.slowmethod.method;
 
 import com.android.ddmlib.Log;
+import com.yxy.slowmethod.Method;
 
 
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class MethodTracer {
         if(startTime!=null && startTime>0){
             timeHm.remove(name);
             Log.d("tag5","测试数据"+(traceToString(3, new Throwable().getStackTrace(), 15)));
-//            Method.Companion.saveSlowMethod(name, System.currentTimeMillis() - startTime);
+            Method.Companion.saveSlowMethod(name, System.currentTimeMillis() - startTime);
         }
 
     }
